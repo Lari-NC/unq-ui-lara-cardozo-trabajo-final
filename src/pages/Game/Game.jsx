@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Game = () => {
   const [tokenPressed, setTokenPressed] = useState();
   const [finalTokens, setFinalTokens] = useState([]);
+  const [points, setPoints] = useState(0);
+  const location = useLocation();
+  const config = location.state?.config || { height: 0, width: 0 };
 
   const handleClick = (token) => {
     setTokenPressed(token);
-  };
-
-  const config = {
-    height: 4,
-    width: 4,
   };
 
   const tokens = [
@@ -34,24 +33,25 @@ const Game = () => {
   }, []);
 
   return (
-    <div className="container text-center">
-      <div className={`row row-cols-${config.width} justify-content-center`}>
-        {finalTokens.map((token, index) => {
-          return (
+    <>
+      <h1 className="text-center text-light">Puntaje: {points}</h1>
+      <div className="container text-center">
+        <div className={`row row-cols-${config.width} justify-content-center`}>
+          {finalTokens.map((token, index) => (
             <button
               key={index}
               className={
                 tokenPressed?.id === finalTokens[index].id ? "border" : ""
               }
-              style={{ height: "120px" }}
+              style={{ height: "12rem" }}
               onClick={() => handleClick(token)}
             >
               {token.value}
             </button>
-          );
-        })}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
