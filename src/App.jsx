@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import './App.css'
-import MainMenu from "./pages/MainMenu/MainMenu"
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import "./App.css";
+import Game from "./pages/Game/game";
+import MainMenu from "./pages/MainMenu/MainMenu";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-  
   return (
     <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainMenu />} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<MainMenu />} />
+        <Route path="/game" element={<Game />} />
+      </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
