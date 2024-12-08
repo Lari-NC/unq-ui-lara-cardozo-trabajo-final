@@ -13,12 +13,12 @@ const MainMenu = () => {
   return (
     <div className="d-flex flex-column align-items-center justify-content-center h-100 gap-3">
       <h1 className="mb-3 text-light" style={{ fontSize: "5rem" }}>
-        Memotest
+        Worldwide Memotest
       </h1>
       <Link
         to="/game"
         state={{ config: { height: 4, width: 4 } }}
-        className="btn btn-danger"
+        className="btn btn-success"
         style={style}
       >
         Easy
@@ -26,14 +26,14 @@ const MainMenu = () => {
       <Link
         to="/game"
         state={{ config: { height: 6, width: 6 } }}
-        className="btn btn-danger"
+        className="btn btn-warning text-light"
         style={style}
       >
         Medium
       </Link>
       <Link
         to="/game"
-        state={{ config: { height: 10, width: 10 } }}
+        state={{ config: { height: 8, width: 8 } }}
         className="btn btn-danger"
         style={style}
       >
