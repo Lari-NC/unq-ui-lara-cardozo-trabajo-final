@@ -1,6 +1,6 @@
 import "./App.css";
-import Game from "./pages/Game/Game";
-import MainMenu from "./pages/MainMenu/MainMenu";
+import Game from "./pages/game/Game";
+import MainMenu from "./pages/mainMenu/MainMenu";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {

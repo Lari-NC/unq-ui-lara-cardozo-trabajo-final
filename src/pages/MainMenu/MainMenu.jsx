@@ -15,6 +15,16 @@ const MainMenu = () => {
       <h1 className="mb-3 text-light" style={{ fontSize: "5rem" }}>
         Worldwide Memotest
       </h1>
+
+      <Link
+        to="/game"
+        state={{ config: { height: 2, width: 2 } }}
+        className="btn btn-primary"
+        style={style}
+      >
+        Pruebas
+      </Link>
+
       <Link
         to="/game"
         state={{ config: { height: 4, width: 4 } }}
@@ -33,7 +43,7 @@ const MainMenu = () => {
       </Link>
       <Link
         to="/game"
-        state={{ config: { height: 8, width: 8 } }}
+        state={{ config: { height: 10, width: 6 } }}
         className="btn btn-danger"
         style={style}
       >
