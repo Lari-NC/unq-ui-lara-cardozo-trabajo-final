@@ -24,13 +24,13 @@ const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center h-100 gap-3">
-      <h1 className="mb-3 text-light" style={{ fontSize: "5rem" }}>
+      <h1 className="mb-3 text-light" style={{ fontFamily: "Barrio", fontSize: "5rem" }}>
         Worldwide Memotest
       </h1>
 
       <span className=" text-light" style={{ fontSize: "1.5rem" }}>Slect a game mode:</span>
       
-      <div class="d-grid d-md-block">
+      <div className="d-grid d-md-block">
         <button className="btn btn-outline-light m-2"> 
           Solitary
         </button>

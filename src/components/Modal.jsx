@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Modal = ({ isOpen, onClose, onCloseOnly, points }) => {
+const Modal = ({ isOpen, onClose, onCloseOnly, points, attempts }) => {
   if (!isOpen) return null;
 
   return (
@@ -22,8 +22,8 @@ const Modal = ({ isOpen, onClose, onCloseOnly, points }) => {
             ></button>
           </div>
           <div className="modal-body text-left">
-            <p>You have successfully completed this level and scored {points}/{points} points.</p>
-            <p>Congratulations!</p>
+            <p>You have successfully completed this level in <strong>{attempts}</strong> attempts and scored {points}/{points} points.</p>
+            <p className="m-0">Congratulations!</p>
           </div>
           <div className="modal-footer d-flex">
             <Link to="/" className="btn btn-secondary">

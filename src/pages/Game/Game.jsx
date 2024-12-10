@@ -14,6 +14,7 @@ const Game = () => {
   const [points, setPoints] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [initializing, setInitializing] = useState(true);
+  const [attempts, setAttempts] = useState(0); 
   const location = useLocation();
   const navigate = useNavigate();
   const config = location.state?.config || { height: 0, width: 0 };
@@ -37,6 +38,7 @@ const Game = () => {
         setCompletedTokens(completedTokens.concat(tokensPressed));
         setPoints(points + 1);
       }
+      setAttempts(attempts + 1);
       setTimeout(() => {
         setTokensPressed([]);
       }, 1500);
@@ -141,6 +143,7 @@ const Game = () => {
         onClose={handleRestart}
         onCloseOnly={handleCloseModal}
         points={points}
+        attempts={attempts}
       />
     </>
   );

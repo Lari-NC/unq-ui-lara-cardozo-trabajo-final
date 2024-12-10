@@ -1,4 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Barrio&family=Galindo&display=swap');
+
 #root {
+  font-family: 'Galindo', Inter, system-ui, 'Barrio', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
   height: 100vh;
   background-color: #20639B;
   overflow: auto;
