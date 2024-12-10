@@ -18,7 +18,7 @@ const MainMenu = () => {
 
       <Link
         to="/game"
-        state={{ config: { height: 2, width: 2 } }}
+        state={{ config: { height: 1, width: 2 } }}
         className="btn btn-primary"
         style={style}
       >

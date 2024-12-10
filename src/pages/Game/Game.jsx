@@ -1,30 +1,22 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Game.css";
-import tokens from "/src/assets/images/tokens.js";
+import Tokens from "../../assets/images/tokens.js";
 import TokenImage from "../../components/TokenImage";
 import TokenButton from "../../components/TokenButton";
 import Modal from "../../components/Modal";
+import BackIcon from "../../assets/icons/back.png";
 
 const Game = () => {
   const [tokensPressed, setTokensPressed] = useState([]);
   const [completedTokens, setCompletedTokens] = useState([]);
   const [finalTokens, setFinalTokens] = useState([]);
   const [points, setPoints] = useState(0);
-
-  const [isModalOpen, setIsModalOpen] = useState(false); //
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [initializing, setInitializing] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
   const config = location.state?.config || { height: 0, width: 0 };
-
-  const initializeTokens = () => {
-    const totalTokens = (config.height * config.width) / 2;
-    let generatedTokens = tokens.slice(0, totalTokens);
-    generatedTokens.forEach((token, index) => {
-      generatedTokens.push({ ...token, id: totalTokens + index });
-    });
-    setFinalTokens(generatedTokens.sort(() => 0.5 - Math.random()));
-  };
 
   const handleClick = (token) => {
     if (
@@ -52,24 +44,25 @@ const Game = () => {
   }, [tokensPressed]);
 
   useEffect(() => {
-    const totalTokens = (config.height * config.width) / 2;
-    let generatedTokens = tokens.slice(0, totalTokens);
-    generatedTokens.forEach((token, index) => {
-      generatedTokens.push({ ...token, id: totalTokens + index });
-    });
-    generatedTokens = generatedTokens.sort(() => 0.5 - Math.random());
+    if (initializing) {
+      const totalTokens = (config.height * config.width) / 2;
+      let generatedTokens = Tokens.slice(0, totalTokens);
+      generatedTokens.forEach((token, index) => {
+        generatedTokens.push({ ...token, id: totalTokens + index });
+      });
+      generatedTokens = generatedTokens.sort(() => 0.5 - Math.random());
 
-    setFinalTokens(generatedTokens);
+      setFinalTokens(generatedTokens);
 
-    initializeTokens(); 
-  }, [config]);
+      setInitializing(false);
+    }
+  }, [config, initializing]);
 
   useEffect(() => {
-    if (
-      points === (finalTokens.length / 2) &&
-      finalTokens.length > 0
-    ) {
-      setIsModalOpen(true);
+    if (points === finalTokens.length / 2 && finalTokens.length > 0) {
+      setTimeout(() => {
+        setIsModalOpen(true);
+      }, 1200);
     }
   }, [completedTokens, finalTokens]);
 
@@ -79,20 +72,40 @@ const Game = () => {
     setFinalTokens([]);
     setPoints(0);
     setIsModalOpen(false);
-    initializeTokens();
+    setInitializing(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
+  const handleGoToMainMenu = () => {
+    navigate("/"); 
+  };
+
   return (
     <>
-      <h1 className="text-center text-dark position-sticky top-0 z-1 bg-primary-subtle p-2">
-        Points: {points}/{finalTokens.length / 2}
-      </h1>
+      <div className="d-flex align-items-center text-dark position-sticky top-0 z-1 bg-primary-subtle p-2 justify-content-between">
+        <button className="btn p-0" onClick={handleGoToMainMenu}>
+          <img
+            src={BackIcon}
+            alt="Go Back"
+            style={{
+              width: "3rem",
+              height: "3rem",
+              objectFit: "contain",
+            }}
+          />
+        </button>
+
+        <h1 className="m-0">
+          Points: {points}/{finalTokens.length / 2}
+        </h1>
+
+        <span />
+      </div>
+
       <div className="container text-center p-4">
-        {/* <div className={`row row-cols-${config.width} justify-content-center`}> */}
         <div
           className="game-grid"
           style={{

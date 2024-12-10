@@ -6,8 +6,8 @@ const TokenImage = ({ token, tokensPressed, completedTokens }) => {
       className={
         tokensPressed.some((pressed) => pressed.id === token.id) ||
         completedTokens.some((pressed) => pressed.id === token.id)
-          ? "show w-100 h-100 object-fit-cover"
-          : "hide w-100 h-100 object-fit-cover"
+          ? "showToken w-100 h-100 object-fit-cover"
+          : "hideToken w-100 h-100 object-fit-cover"
       }
     />
   );
