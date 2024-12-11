@@ -7,7 +7,7 @@ const TokenButton = ({ token, index, tokensPressed, completedTokens, onClick }) 
           ? "hideToken w-100 h-100 bg-dark"
           : "showToken w-100 h-100 bg-dark"
       }`}
-      style={{ fontSize: "2rem"}}
+      style={{ fontSize: "2rem" }}
       onClick={() => onClick(token)}
     >
       {index}

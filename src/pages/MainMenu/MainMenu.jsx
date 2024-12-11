@@ -1,9 +1,11 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import ModalMode from "../../components/ModalMode"
+import GameMode from "../../components/abMode/GameMode"
+import { useState } from "react";
 
 const MainMenu = () => {
-const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMode, setSelectedMode] = useState();
+  const [player1, setPlayer1] = useState();
+  const [player2, setPlayer2] = useState();
 
   const style = {
     fontSize: "2.5rem",
@@ -14,12 +16,11 @@ const [isModalOpen, setIsModalOpen] = useState(false);
     justifyContent: "center",
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const preventClick = (e) => {
+    if (!selectedMode) {
+      e.preventDefault();
+      alert("Selecciona un modo de juego primero.");
+    }
   };
 
   return (
@@ -28,54 +29,44 @@ const [isModalOpen, setIsModalOpen] = useState(false);
         Worldwide Memotest
       </h1>
 
-      <span className=" text-light" style={{ fontSize: "1.5rem" }}>Slect a game mode:</span>
-      
-      <div className="d-grid d-md-block">
-        <button className="btn btn-outline-light m-2"> 
-          Solitary
-        </button>
+      <GameMode onSelectedMode={setSelectedMode} onPlayer1={setPlayer1} onPlayer2={setPlayer2} />
 
-        <button className="btn btn-outline-light m-2" onClick={openModal}> 
-         1 vs 1
-        </button>
-
-        {isModalOpen && (
-          <ModalMode isOpen={isModalOpen} onClose={closeModal} />
-        )}
-      </div>
-
-      <span className=" text-light" style={{ fontSize: "1.5rem" }}>Slect a dificulty level:</span>
-
-      <Link
-        to="/game"
-        state={{ config: { height: 1, width: 2 } }}
+      {/* <Link
+        to={selectedMode === "1vs1" ? "/game1vs1" : "/game"}
+        state={{ config: { height: 2, width: 2 }, players: { player1, player2 }, }}
         className="btn btn-primary"
         style={style}
+        onClick={preventClick}
       >
         Pruebas
-      </Link>
+      </Link> */}
 
       <Link
-        to="/game"
-        state={{ config: { height: 4, width: 4 } }}
+        to={selectedMode === "1vs1" ? "/game1vs1" : "/game"}
+        state={{ config: { height: 4, width: 4 }, players: { player1, player2 }, }}
         className="btn btn-success"
         style={style}
+        onClick={preventClick}
       >
         Easy
       </Link>
+
       <Link
-        to="/game"
-        state={{ config: { height: 6, width: 6 } }}
+        to={selectedMode === "1vs1" ? "/game1vs1" : "/game"}
+        state={{ config: { height: 6, width: 6 }, players: { player1, player2 }, }}
         className="btn btn-warning text-light"
         style={style}
+        onClick={preventClick}
       >
         Medium
       </Link>
+      
       <Link
-        to="/game"
-        state={{ config: { height: 10, width: 6 } }}
+        to={selectedMode === "1vs1" ? "/game1vs1" : "/game"}
+        state={{ config: { height: 10, width: 6 }, players: { player1, player2 }, }}
         className="btn btn-danger"
         style={style}
+        onClick={preventClick}
       >
         Hard
       </Link>

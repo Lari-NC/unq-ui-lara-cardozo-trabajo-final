@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./Game.css";
-import Tokens from "../../assets/images/tokens.js";
-import TokenImage from "../../components/TokenImage";
-import TokenButton from "../../components/TokenButton";
-import Modal from "../../components/Modal";
-import BackIcon from "../../assets/icons/back.png";
+import GameHeader from "../../components/header/GameHeader.jsx";
+import GameGrid from "../../components/grid/GameGrid.jsx";
+import Modal from "../../components/modal/Modal";
 
 const Game = () => {
   const [tokensPressed, setTokensPressed] = useState([]);
@@ -13,60 +11,10 @@ const Game = () => {
   const [finalTokens, setFinalTokens] = useState([]);
   const [points, setPoints] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [attempts, setAttempts] = useState(0);
   const [initializing, setInitializing] = useState(true);
-  const [attempts, setAttempts] = useState(0); 
   const location = useLocation();
-  const navigate = useNavigate();
   const config = location.state?.config || { height: 0, width: 0 };
-
-  const handleClick = (token) => {
-    if (
-      tokensPressed.length < 2 &&
-      !tokensPressed.some((tk) => tk.id === token.id)
-    ) {
-      setTokensPressed((prevState) => {
-        const updatedTokensPressed = [...tokensPressed];
-        updatedTokensPressed.push(token);
-        return updatedTokensPressed;
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (tokensPressed.length == 2) {
-      if (tokensPressed[0].value === tokensPressed[1].value) {
-        setCompletedTokens(completedTokens.concat(tokensPressed));
-        setPoints(points + 1);
-      }
-      setAttempts(attempts + 1);
-      setTimeout(() => {
-        setTokensPressed([]);
-      }, 1500);
-    }
-  }, [tokensPressed]);
-
-  useEffect(() => {
-    if (initializing) {
-      const totalTokens = (config.height * config.width) / 2;
-      let generatedTokens = Tokens.slice(0, totalTokens);
-      generatedTokens.forEach((token, index) => {
-        generatedTokens.push({ ...token, id: totalTokens + index });
-      });
-      generatedTokens = generatedTokens.sort(() => 0.5 - Math.random());
-
-      setFinalTokens(generatedTokens);
-
-      setInitializing(false);
-    }
-  }, [config, initializing]);
-
-  useEffect(() => {
-    if (points === finalTokens.length / 2 && finalTokens.length > 0) {
-      setTimeout(() => {
-        setIsModalOpen(true);
-      }, 1200);
-    }
-  }, [completedTokens, finalTokens]);
 
   const handleRestart = () => {
     setTokensPressed([]);
@@ -81,63 +29,27 @@ const Game = () => {
     setIsModalOpen(false);
   };
 
-  const handleGoToMainMenu = () => {
-    navigate("/"); 
-  };
-
   return (
     <>
-      <div className="d-flex align-items-center text-dark position-sticky top-0 z-1 bg-primary-subtle p-2 justify-content-between">
-        <button className="btn p-0" onClick={handleGoToMainMenu}>
-          <img
-            src={BackIcon}
-            alt="Go Back"
-            style={{
-              width: "3rem",
-              height: "3rem",
-              objectFit: "contain",
-            }}
-          />
-        </button>
+      <GameHeader points={points} finalTokens={finalTokens} />
 
-        <h1 className="m-0">
-          Points: {points}/{finalTokens.length / 2}
-        </h1>
+      <GameGrid
+        config={config}
+        points={points}
+        setPoints={setPoints}
+        tokensPressed={tokensPressed}
+        setTokensPressed={setTokensPressed}
+        completedTokens={completedTokens}
+        setCompletedTokens={setCompletedTokens}
+        setIsModalOpen={setIsModalOpen}
+        attempts={attempts}
+        setAttempts={setAttempts}
+        initializing={initializing}
+        setInitializing={setInitializing}
+        finalTokens={finalTokens}
+        setFinalTokens={setFinalTokens}
+      />
 
-        <span />
-      </div>
-
-      <div className="container text-center p-4">
-        <div
-          className="game-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${config.width}, 1fr)`,
-            gap: "10px",
-          }}
-        >
-          {finalTokens.map((token, index) => (
-            <div
-              key={token.id}
-              className="position-relative p-0"
-              style={{ height: "12rem" }}
-            >
-              <TokenImage
-                token={token}
-                tokensPressed={tokensPressed}
-                completedTokens={completedTokens}
-              />
-              <TokenButton
-                token={token}
-                index={index}
-                tokensPressed={tokensPressed}
-                completedTokens={completedTokens}
-                onClick={handleClick}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
       <Modal
         isOpen={isModalOpen}
         onClose={handleRestart}
