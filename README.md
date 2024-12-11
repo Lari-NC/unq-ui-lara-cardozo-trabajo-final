@@ -1,14 +1,10 @@
-# React + Vite
+• CÓMO DESCARGAR E INSTALAR EL PROYECTO?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+→ debe tener instalado node.js en su pc.
 
-Currently, two official plugins are available:
+• CÓMO EJECUTARLO LOCALMENTE?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-
-NOTAS:
-• No reinicia en el 1vs1
-• Que no me deje apretar el nivel sin elegir un modo
-• Puedo cambiar el alert deñ MainMenu a un toast?
+→ clonar el repositorio con el comando `git clone https://github.com/Lari-NC/unq-ui-lara-cardozo-trabajo-final.git` desde la git bash abierta en la carpeta deseada.
+→ abrir el repositorio en Visual Studio Code y abrir una terminal.
+→ correr el comando `npm install` y esperar a que se instale todo lo necesario.
+→ correr el comando `npm run dev` y ya está todo listo paa navegar y jugar el WORLDWIDE MEMOTEST!
