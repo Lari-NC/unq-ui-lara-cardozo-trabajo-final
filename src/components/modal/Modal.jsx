@@ -34,7 +34,7 @@ const Modal = ({ isOpen, onClose, onCloseOnly, points, attempts }) => {
               Main Menu
             </Link>
             <button type="button" className="btn btn-primary" onClick={onClose}>
-              Reiniciar
+              Restart
             </button>
           </div>
         </div>

@@ -1,12 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Modal2 = ({
-  isOpen,
-  onClose,
-  onCloseOnly,
-  winner,
-  loser,
-}) => {
+const Modal2 = ({ isOpen, onClose, onCloseOnly, winner, loser }) => {
   if (!isOpen) return null;
 
   return (
@@ -27,9 +21,9 @@ const Modal2 = ({
               onClick={onCloseOnly}
             ></button>
           </div>
-          <div className="modal-body text-left">
+          <div className="modal-body text-start">
             <p className="mb-0">You have successfully completed this level.</p>
-            <p>Congratulations!</p>
+            <p >Congratulations!</p>
             <p className="m-0">{loser} try better next time.</p>
           </div>
           <div className="modal-footer d-flex">
@@ -37,7 +31,7 @@ const Modal2 = ({
               Main Menu
             </Link>
             <button type="button" className="btn btn-primary" onClick={onClose}>
-              Reiniciar
+              Restart
             </button>
           </div>
         </div>

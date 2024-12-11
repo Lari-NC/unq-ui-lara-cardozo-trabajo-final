@@ -33,7 +33,7 @@ const MainMenu = () => {
 
       {/* <Link
         to={selectedMode === "1vs1" ? "/game1vs1" : "/game"}
-        state={{ config: { height: 2, width: 2 }, players: { player1, player2 }, }}
+        state={{ config: { height: 1, width: 2 }, players: { player1, player2 }, }}
         className="btn btn-primary"
         style={style}
         onClick={preventClick}
